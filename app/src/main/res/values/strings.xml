@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">DuAn2Android</string>
+    <string name="app_name">Online Store</string>
+    <string name="name_user">Họ và tên: </string>
+    <string name="Name_user">Nhập họ và tên</string>
+    <string name="add_name_shop">Nhập tên shop</string>
+    <string name="add_name_product">Nhập tên sản phẩm</string>
+    <string name="add_price">Nhập giá sản phẩm</string>
+    <string name="add_amount">Nhập số lượng</string>
+    <string name="add_describe">Nhập mô tả</string>
+    <string name="add_color">Chọn màu</string>
+    <string name="add_aspect">Chọn tình trạng</string>
+    <string name="add_status">Chọn trạng thái</string>
+    <string name="post">Đăng</string>
+    <string name="btn_add">Thêm</string>
+    <string name="available">Có sẵn</string>
+    <string name="oder">Oder</string>
+    <string name="booth_for_houseware">Đồ gia dụng</string>
+    <string name="booth_for_phone">Điện thoại</string>
+    <string name="manage_product">Quản lý sản phẩm</string>
+    <string name="nullcart">Giỏ hàng trống</string>
+    <string name="add_product">Thêm sản phẩm</string>
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:padding="10dp"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã xác nhận"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"/>
+   <EditText
+       android:imeOptions="actionDone"
+       android:inputType="phone"
+       android:textColor="@color/colorPrimary"
+       android:textStyle="bold"
+       android:layout_marginTop="10dp"
+       android:id="@+id/code"
+       android:layout_width="120dp"
+       android:layout_gravity="center_horizontal"
+       android:layout_height="wrap_content"
+       android:hint="Nhập mã"
+       />
+    <Button
+        android:background="@drawable/style_button_dangnhap"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Xác nhận"
+        android:id="@+id/xacnhan"/>
+    <TextView
+        android:id="@+id/txtsend"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gửi lại mã"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loading"
+        android:visibility="invisible"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/loading_gif"/>
+
+
+</LinearLayout>

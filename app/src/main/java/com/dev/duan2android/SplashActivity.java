@@ -97,7 +97,7 @@ public class SplashActivity extends AppCompatActivity {
                         numberProgressBar.setVisibility(View.VISIBLE);
                         numberProgressBar.setProgress(intI);
                         if (intI == 100) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }
