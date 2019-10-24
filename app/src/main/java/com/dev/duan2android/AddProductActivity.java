@@ -295,9 +295,9 @@ public class AddProductActivity extends AppCompatActivity {
 
         final ArrayList<String> listLoai = new ArrayList<>();
         listLoai.add("Chọn loại");
-        listLoai.add("Quần áo nam");
-        listLoai.add("Quần áo nữ");
-        listLoai.add("Điện thoại");
+        listLoai.add("Điện Thoại & Máy Tính");
+        listLoai.add("Người Yêu");
+        listLoai.add("Phương Tiện");
         listLoai.add("Đồ gia dụng");
 
 
@@ -342,10 +342,10 @@ public class AddProductActivity extends AppCompatActivity {
                             Toast.makeText(AddProductActivity.this, "6", Toast.LENGTH_SHORT).show();
                             return;
                         }
-//                        if (uri.isEmpty()){
-//                            Toast.makeText(AddProductActivity.this, "7", Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
+                        if (uri.isEmpty()){
+                            Toast.makeText(AddProductActivity.this, "7", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         if (listcolor.isEmpty()){
                             Toast.makeText(AddProductActivity.this, "8", Toast.LENGTH_SHORT).show();
                             return;

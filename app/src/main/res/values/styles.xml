@@ -16,9 +16,9 @@
         <item name="progress_current">50</item>
 
         <item name="progress_unreached_color">@color/colorAccent</item>
-        <item name="progress_reached_color">@color/colorPrimary</item>
+        <item name="progress_reached_color">@color/white</item>
         <item name="progress_text_size">10sp</item>
-        <item name="progress_text_color">@color/colorPrimary</item>
+        <item name="progress_text_color">@color/white</item>
 
         <item name="progress_reached_bar_height">1.5dp</item>
         <item name="progress_unreached_bar_height">0.75dp</item>

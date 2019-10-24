@@ -62,17 +62,17 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 final String phone = edtphone.getText().toString().trim();
                 if (phone.equals("")) {
-                    edtphone.setError("error1");
+                    edtphone.setError("Nhập số điện thoại!!!");
                     edtphone.requestFocus();
                     return;
                 }
                 if (!phone.startsWith("+84") && !phone.startsWith("0")) {
-                    edtphone.setError("error12");
+                    edtphone.setError("Số chưa đúng!!!");
                     edtphone.requestFocus();
                     return;
                 }
                 if (phone.length() != 10 && phone.length() != 12) {
-                    edtphone.setError("error1232");
+                    edtphone.setError("Số chưa đúng!!!");
                     edtphone.requestFocus();
                     return;
                 }
@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity {
                         intent.putExtra("id", user.getUid());
                         intent.putExtra("phone", user.getPhoneNumber());
                         startActivity(intent);
-                        Log.e("Tinh", "B");
+                        Log.e("ANBC", "B");
                         finish();
                     }
             }

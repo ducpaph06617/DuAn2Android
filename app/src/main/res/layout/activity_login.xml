@@ -104,7 +104,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="login with fb"
+                    android:text="Bạn có thể đăng nhập bằng"
                     android:gravity="center"/>
 
 
@@ -116,7 +116,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-
                 >
 
                 <ImageView
@@ -125,13 +124,14 @@
                     android:layout_height="15dp"
                     android:layout_gravity="top"
                     android:src="@drawable/ic_ground_a" />
+
                 <TextView
-                    android:fontFamily="font_1.ttf"
                     android:id="@+id/txtGround"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:text="NOHOPE"
+                    android:fontFamily="font_1.ttf"
+                    android:text="NO-HOPE"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold" />
