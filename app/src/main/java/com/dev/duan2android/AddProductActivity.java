@@ -131,7 +131,7 @@ public class AddProductActivity extends AppCompatActivity {
         edtTensp = findViewById(R.id.edt_tensp);
         edtGia = findViewById(R.id.edt_gia);
         spinner = findViewById(R.id.spinner);
-        edtSoluong = findViewById(R.id.edt_soluong);
+        //edtSoluong = findViewById(R.id.edt_soluong);
         btnChonmau = findViewById(R.id.btn_chonmau);
         edtMota = findViewById(R.id.edt_mota);
         btnDangsp = findViewById(R.id.btn_dangsp);
@@ -272,7 +272,7 @@ public class AddProductActivity extends AppCompatActivity {
                         String nameproduc = edtTensp.getText().toString().trim();
                         String price = edtGia.getText().toString().trim();
                         String des = edtMota.getText().toString().trim();
-                        String soluong = edtSoluong.getText().toString().trim();
+                        //String soluong = edtSoluong.getText().toString().trim();
                         final String neww = sharedPreferences.getString("new", "");
                         //String statuss = sharedPreferences.getString("status", "");
                         if (listLoai.get(position).equalsIgnoreCase("Chọn loại")) {
@@ -287,9 +287,9 @@ public class AddProductActivity extends AppCompatActivity {
                         if (price.equals("")) {
                             return;
                         }
-                        if (soluong.equals("")) {
-                            return;
-                        }
+//                        if (soluong.equals("")) {
+//                            return;
+//                        }
                         if (des.equals("")) {
                             return;
                         }
@@ -304,7 +304,7 @@ public class AddProductActivity extends AppCompatActivity {
 //                        }
 
                         Calendar calendar = Calendar.getInstance();
-                        User.Product product = new User.Product(nameshop, nameproduc, price, data, des, "sp:" + calendar.getTimeInMillis(), uri.get(0), listLoai.get(position), soluong, String.valueOf(calendar.getTimeInMillis()));
+                        User.Product product = new User.Product(nameshop, nameproduc, price, data, des, "sp:" + calendar.getTimeInMillis(), uri.get(0), listLoai.get(position), String.valueOf(calendar.getTimeInMillis()));
 
                         List<String> sp = new ArrayList<>();
                         sp.clear();

@@ -40,7 +40,7 @@ public class ProductuserAdapter extends RecyclerView.Adapter<ProductuserAdapter.
         holder.txtColor.setText("Màu:" + product.getColorproduct());
         holder.txtgia.setText("Giá:" + Double.parseDouble(product.getPriceproduct()) + "đ");
         holder.txtnameproduct.setText("Tên sản phẩm:" + product.getNameproduct());
-        holder.txtsoluong.setText("Số lượng:" + product.getSoluong());
+        //holder.txtsoluong.setText("Số lượng:" + product.getSoluong());
 
         Picasso.get().load(product.getUri()).into(holder.imgnameproduct);
 
