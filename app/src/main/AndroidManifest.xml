@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ProductMActivity"></activity>
-        <activity android:name=".LoginActivity" ></activity>
+        <activity android:name=".ProductManagementActivity"
+            android:theme="@style/Create">
+
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".AddProductActivity"
+            android:theme="@style/Create">
+
+        </activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddProductActivity" />
     </application>
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

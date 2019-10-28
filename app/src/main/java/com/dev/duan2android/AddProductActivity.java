@@ -1,10 +1,5 @@
 package com.dev.duan2android;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -16,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,15 +19,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.dev.duan2android.adapter.Adapter;
 import com.dev.duan2android.adapter.ColorAdapter;
 import com.dev.duan2android.models.ColorModel;
-import com.dev.duan2android.models.ProductModel;
 import com.dev.duan2android.user.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -63,6 +65,9 @@ public class AddProductActivity extends AppCompatActivity {
     private EditText edtSoluong;
     private Button btnChonAnh;
     private Button btnChonmau;
+
+    private Button btnHuy;
+    private Button btnTrangthai;
     private EditText edtMota;
     private Button btnDangsp;
     private GifImageView loading;
@@ -82,8 +87,7 @@ public class AddProductActivity extends AppCompatActivity {
     private List<ColorModel> models = new ArrayList<>();
 
     private List<String> listcolor = new ArrayList<>();
-    private  String data="";
-
+    private String data = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,10 @@ public class AddProductActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://onlinestore-41bf0.appspot.com");
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        Log.e("idUUUU", "onCreate: "+id );
+
         mapped();
         onclick();
         ISNav.getInstance().init(new ImageLoader() {
@@ -100,7 +108,7 @@ public class AddProductActivity extends AppCompatActivity {
                 Glide.with(context).load(path).into(imageView);
             }
         });
-        //getSupportActionBar().setTitle(getString(R.string.add_product));
+        getSupportActionBar().setTitle(getString(R.string.add_product));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerviewimg);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -110,27 +118,13 @@ public class AddProductActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         addproduct();
+
+
     }
-    private void onclick() {
-        btnChonmau.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                btnChonmau.setText("Chọn màu");
-                btnChonmau.setTextColor(R.color.colorPrimary);
-                btnChonmau.setTextSize(10f);
-                addlistcolor();
-            }
-        });
-        btnDangsp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addproduct();
-            }
-        });
-    }
+
+
     private void mapped() {
-        sharedPreferences=getSharedPreferences("Data",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
         layout = findViewById(R.id.layout);
         edtTenshop = findViewById(R.id.edt_tenshop);
         recyclerviewimg = findViewById(R.id.recyclerviewimg);
@@ -141,8 +135,33 @@ public class AddProductActivity extends AppCompatActivity {
         btnChonmau = findViewById(R.id.btn_chonmau);
         edtMota = findViewById(R.id.edt_mota);
         btnDangsp = findViewById(R.id.btn_dangsp);
+        btnHuy = findViewById(R.id.btn_cancle);
         loading = findViewById(R.id.loading);
         btnChonAnh = findViewById(R.id.btn_themanh);
+    }
+
+    private void onclick() {
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddProductActivity.this,ProductManagementActivity.class);
+                intent.putExtra("id1", id);
+                Log.e("abcccccc2", "onSuccess: "+id );
+                finish();
+            }
+        });
+        btnChonmau.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                btnChonmau.setText("Chọn màu");
+                btnChonmau.setTextColor(R.color.colorPrimaryDark);
+                btnChonmau.setTextSize(10f);
+                addlistcolor();
+            }
+        });
+
     }
 
     @Override
@@ -160,6 +179,8 @@ public class AddProductActivity extends AppCompatActivity {
         }
 
     }
+
+
     public void imgselector(View view) {
         ISListConfig config = new ISListConfig.Builder()
                 .multiSelect(true)
@@ -169,6 +190,7 @@ public class AddProductActivity extends AppCompatActivity {
                 .statusBarColor(Color.parseColor("#3F51B5")).build();
         ISNav.getInstance().toListActivity(this, config, REQUEST_LIST_CODE);
     }
+
     private void uploadImage() {
 
         if (path != null && i < path.size()) {
@@ -225,6 +247,99 @@ public class AddProductActivity extends AppCompatActivity {
         }
 
     }
+
+    private void addproduct() {
+
+        final ArrayList<String> listLoai = new ArrayList<>();
+        listLoai.add("Chọn loại");
+        listLoai.add("Quần áo nam");
+        listLoai.add("Quần áo nữ");
+        listLoai.add("Điện thoại & Laptop");
+        listLoai.add("Đồ gia dụng");
+        listLoai.add("Người Yêu");
+
+
+        ArrayAdapter adapter = new ArrayAdapter(AddProductActivity.this, android.R.layout.simple_spinner_item, listLoai);
+        spinner.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, final int position, final long in) {
+                btnDangsp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String nameshop = edtTenshop.getText().toString().trim();
+                        String nameproduc = edtTensp.getText().toString().trim();
+                        String price = edtGia.getText().toString().trim();
+                        String des = edtMota.getText().toString().trim();
+                        String soluong = edtSoluong.getText().toString().trim();
+                        final String neww = sharedPreferences.getString("new", "");
+                        //String statuss = sharedPreferences.getString("status", "");
+                        if (listLoai.get(position).equalsIgnoreCase("Chọn loại")) {
+                            return;
+                        }
+                        if (nameshop.equals("")) {
+                            return;
+                        }
+                        if (nameproduc.equals("")) {
+                            return;
+                        }
+                        if (price.equals("")) {
+                            return;
+                        }
+                        if (soluong.equals("")) {
+                            return;
+                        }
+                        if (des.equals("")) {
+                            return;
+                        }
+                        if (uri.isEmpty()) {
+                            return;
+                        }
+                        if (listcolor.isEmpty()) {
+                            return;
+                        }
+//                        if (neww.equals("")) {
+//                            return;
+//                        }
+
+                        Calendar calendar = Calendar.getInstance();
+                        User.Product product = new User.Product(nameshop, nameproduc, price, data, des, "sp:" + calendar.getTimeInMillis(), uri.get(0), listLoai.get(position), soluong, String.valueOf(calendar.getTimeInMillis()));
+
+                        List<String> sp = new ArrayList<>();
+                        sp.clear();
+                        List<User.Id> ids = new ArrayList<>();
+                        ids.add(new User.Id("sp:" + calendar.getTimeInMillis()));
+                        sp.add("sp:" + calendar.getTimeInMillis());
+                        mDatabase.child("id").child("User").child(id).child("user").child("idsp").child(sp.get(0)).setValue(sp.get(0));
+                        mDatabase.child("id").child("User").child("sp").child(sp.get(0)).setValue(uri);
+                        mDatabase.child("id").child(sp.get(0)).child("product").setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(AddProductActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
+                                System.exit(0);
+                                Intent intent = new Intent(AddProductActivity.this,ProductManagementActivity.class);
+                                intent.putExtra("id1", id);
+                                Log.e("abcccccc", "onSuccess: "+id );
+                                finish();
+
+                            }
+                        });
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+    }
+
     private void addlistcolor() {
         models.clear();
         listcolor.clear();
@@ -273,14 +388,14 @@ public class AddProductActivity extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                if (listcolor==null){
+                if (listcolor == null) {
                     return;
-                }else {
+                } else {
 
-                    for (int i=0;i<listcolor.size();i++){
-                        data+=listcolor.get(i)+",";
-                        btnChonmau.setText("Màu:"+data);
-                        btnChonmau.setTextColor(R.color.colorPrimary);
+                    for (int i = 0; i < listcolor.size(); i++) {
+                        data += listcolor.get(i) + ",";
+                        btnChonmau.setText("Màu:" + data);
+                        btnChonmau.setTextColor(R.color.colorPrimaryDark);
                         btnChonmau.setTextSize(10f);
                     }
                     dialog.dismiss();
@@ -291,114 +406,22 @@ public class AddProductActivity extends AppCompatActivity {
 
         dialog.show();
     }
-    private void addproduct() {
 
-        final ArrayList<String> listLoai = new ArrayList<>();
-        listLoai.add("Chọn loại");
-        listLoai.add("Điện Thoại & Máy Tính");
-        listLoai.add("Người Yêu");
-        listLoai.add("Phương Tiện");
-        listLoai.add("Đồ gia dụng");
-
-
-        ArrayAdapter adapter = new ArrayAdapter(AddProductActivity.this, android.R.layout.simple_spinner_item, listLoai);
-        spinner.setAdapter(adapter);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, final int position, final long in) {
-                btnDangsp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String nameshop = edtTenshop.getText().toString().trim();
-                        String nameproduc = edtTensp.getText().toString().trim();
-                        String price = edtGia.getText().toString().trim();
-                        String des = edtMota.getText().toString().trim();
-                        String soluong=edtSoluong.getText().toString().trim();
-
-
-                        if (listLoai.get(position).equalsIgnoreCase("Chọn loại")){
-                            Toast.makeText(AddProductActivity.this, "1", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (nameshop.equals("")){
-                            Toast.makeText(AddProductActivity.this, "2", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (nameproduc.equals("")){
-                            Toast.makeText(AddProductActivity.this, "3", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (price.equals("")){
-                            Toast.makeText(AddProductActivity.this, "4", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (soluong.equals("")){
-                            Toast.makeText(AddProductActivity.this, "5", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (des.equals("")){
-                            Toast.makeText(AddProductActivity.this, "6", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (uri.isEmpty()){
-                            Toast.makeText(AddProductActivity.this, "7", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (listcolor.isEmpty()){
-                            Toast.makeText(AddProductActivity.this, "8", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-
-                        Calendar calendar=Calendar.getInstance();
-                        ProductModel.Product product=new ProductModel.Product(nameshop,nameproduc,price,data,des,"sp:"+calendar.getTimeInMillis(),uri.get(0),listLoai.get(position),soluong,String.valueOf(calendar.getTimeInMillis()));
-
-                        List<String> sp=new ArrayList<>();
-                        sp.clear();
-                        List<User.Id> ids=new ArrayList<>();
-                        ids.add(new User.Id("sp:"+calendar.getTimeInMillis()));
-                        sp.add("sp:"+calendar.getTimeInMillis());
-                        mDatabase.child("id").child("User").child(id).child("user").child("idsp").child(sp.get(0)).setValue(sp.get(0));
-                        mDatabase.child("id").child("User").child("sp").child(sp.get(0)).setValue(uri);
-                        mDatabase.child("id").child(sp.get(0)).child("product").child("product").setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(AddProductActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(AddProductActivity.this,ProductMActivity.class));
-                                finish();
-
-                            }
-                        });
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-    }
-    public void addcolor(int position){
-        boolean a= listcolor.add(models.get(position).getColor());
-        Log.e("TAG",a+"");
-        Log.e("TAG",listcolor.size()+"");
+    public void addcolor(int position) {
+        boolean a = listcolor.add(models.get(position).getColor());
+        Log.e("TAG", a + "");
+        Log.e("TAG", listcolor.size() + "");
     }
 
-    public void deletecolor(String color){
+    public void deletecolor(String color) {
 
-        for (int i=0;i<listcolor.size();i++){
-            if (color.equals(listcolor.get(i))){
+        for (int i = 0; i < listcolor.size(); i++) {
+            if (color.equals(listcolor.get(i))) {
                 listcolor.remove(i);
             }
         }
-        Log.e("TAG",listcolor.size()+"");
+        Log.e("TAG", listcolor.size() + "");
     }
+
 
 }

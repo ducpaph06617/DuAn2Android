@@ -176,6 +176,15 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/style_button_dangnhap"
                 android:text="@string/post" />
+            <Button
+                android:textColor="@color/white"
+                android:id="@+id/btn_cancle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/style_button_dangnhap"
+                android:text="Hủy" />
         </LinearLayout>
     </ScrollView>
     <pl.droidsonroids.gif.GifImageView

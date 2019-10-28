@@ -1,8 +1,5 @@
 package com.dev.duan2android;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +13,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.dev.duan2android.base.BaseActivity;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.ActionCodeSettings;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +36,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 import pl.droidsonroids.gif.GifImageView;
+
 
 public class LoginActivity extends BaseActivity {
     public EditText code;
@@ -43,8 +49,11 @@ public class LoginActivity extends BaseActivity {
         mapped();
         method();
         onclick();
+
+
     }
 
+    //Ánh xạ
     private void mapped() {
 
         mAuth = FirebaseAuth.getInstance();
@@ -56,23 +65,30 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    //Các sự kiện onClick
     private void onclick() {
+
+
+
+
+
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String phone = edtphone.getText().toString().trim();
                 if (phone.equals("")) {
-                    edtphone.setError("Nhập số điện thoại!!!");
+                    edtphone.setError(getString(R.string.error));
                     edtphone.requestFocus();
                     return;
                 }
                 if (!phone.startsWith("+84") && !phone.startsWith("0")) {
-                    edtphone.setError("Số chưa đúng!!!");
+                    edtphone.setError(getString(R.string.error_1));
                     edtphone.requestFocus();
                     return;
                 }
                 if (phone.length() != 10 && phone.length() != 12) {
-                    edtphone.setError("Số chưa đúng!!!");
+                    edtphone.setError(getString(R.string.error_2));
                     edtphone.requestFocus();
                     return;
                 }
@@ -90,12 +106,12 @@ public class LoginActivity extends BaseActivity {
                     public void onClick(View v) {
                         String codeid = code.getText().toString();
                         if (codeid.equals("")) {
-                            code.setError("Error134");
+                            code.setError(getString(R.string.enter_code));
                             code.requestFocus();
                             return;
                         }
                         if (codeid.length() != 6) {
-                            code.setError("Error1345");
+                            code.setError(getString(R.string.enter_codeid));
                             code.requestFocus();
                             return;
                         }
@@ -115,6 +131,7 @@ public class LoginActivity extends BaseActivity {
             }
 
         });
+
     }
 
     private void method() {
@@ -123,21 +140,34 @@ public class LoginActivity extends BaseActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-//                    Log.e("TAG", user.getProviders().get(0));
-
+                    Log.e("TAG", user.getProviderData().get(0).getProviderId());
+                    if (user.getProviderData().get(0).getProviderId().equals("facebook.com")) {
                         Intent intent = new Intent(LoginActivity.this, AddProductActivity.class);
-//                        intent.putExtra("provider", user.getProviders().get(0));
+                        intent.putExtra("name", user.getDisplayName());
+                        intent.putExtra("uri", String.valueOf(user.getPhotoUrl()));
+                        intent.putExtra("id", user.getUid());
+                        intent.putExtra("provider", user.getProviderData().get(0).getProviderId());
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(LoginActivity.this, AddProductActivity.class);
+                        intent.putExtra("provider", user.getProviderData().get(0).getProviderId());
                         intent.putExtra("id", user.getUid());
                         intent.putExtra("phone", user.getPhoneNumber());
                         startActivity(intent);
-                        Log.e("ANBC", "B");
+                        Log.e("Tinh", "B");
                         finish();
                     }
+                } else {
+
+
+                }
             }
         };
 
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -148,6 +178,12 @@ public class LoginActivity extends BaseActivity {
         super.onBackPressed();
 
     }
+
+
+
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -155,6 +191,7 @@ public class LoginActivity extends BaseActivity {
 
 
     }
+
     public Dialog dialog(int layoutid, int height) {
         android.app.Dialog dialog = new android.app.Dialog(this, R.style.CustomDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -170,6 +207,7 @@ public class LoginActivity extends BaseActivity {
         return dialog;
 
     }
+
 
     private void sendCode(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -235,9 +273,8 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
+        public void onVerificationFailed(FirebaseException e) {
 
         }
-
     };
 }

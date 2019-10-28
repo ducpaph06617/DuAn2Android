@@ -8,6 +8,21 @@
         <item name="colorAccent">@color/colorPrimaryLight</item>
     </style>
 
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryLight</item>
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+
+    <style name="Create" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryLight</item>
+    </style>
+
+
+
     <style name="ProgressBar">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
@@ -15,7 +30,7 @@
         <item name="progress_max">100</item>
         <item name="progress_current">50</item>
 
-        <item name="progress_unreached_color">@color/colorAccent</item>
+        <item name="progress_unreached_color">@color/colorPrimaryDark</item>
         <item name="progress_reached_color">@color/white</item>
         <item name="progress_text_size">10sp</item>
         <item name="progress_text_color">@color/white</item>
@@ -23,10 +38,41 @@
         <item name="progress_reached_bar_height">1.5dp</item>
         <item name="progress_unreached_bar_height">0.75dp</item>
     </style>
+
+    <style name="CustomTitleTextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:windowBackground">@style/ThemeOverlay.AppCompat</item>
+    </style>
+
     <style name="CustomDialog" parent="@style/AppTheme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="PauseDialog" parent="@style/AppTheme">
+        <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="PauseDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim2</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+    <style name="PauseDialog1" parent="@style/AppTheme">
+        <item name="android:windowAnimationStyle">@style/PauseDialogAnimation1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="PauseDialogAnimation1">
+        <item name="android:windowEnterAnimation">@anim/anim4</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
 
 </resources>

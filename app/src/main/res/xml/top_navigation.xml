@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home"
+        title="Trang chủ" />
+    <tab
+        id="@+id/tab_cart"
+        icon="@drawable/ic_cart"
+        title="Giỏ hàng" />
+    <tab
+        id="@+id/tab_notification"
+        icon="@drawable/ic_notification"
+        title="Thông báo" />
+    <tab
+        id="@+id/tab_menu"
+        icon="@drawable/ic_menu"
+        title="Tính năng" />
+
+</tabs>

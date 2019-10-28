@@ -1,7 +1,87 @@
 <resources>
     <string name="app_name">Online Store</string>
+    <!--Login-->
+    <string name="phone_number">Số điện thoại</string>
+    <string name="password">Mật khẩu</string>
+    <string name="title_login_facebook">Bạn có thể đăng nhập bằng</string>
+    <string name="btn_login">Đăng nhập</string>
+    <string name="btn_create_account">Tạo tài khoản</string>
+    <string name="ground">Nohope Studio</string>
+    <string name="seach">Online Store</string>
+    <string name="seach_store">Tìm kiếm sản phẩm</string>
+
+    <!--Create an Account-->
     <string name="name_user">Họ và tên: </string>
     <string name="Name_user">Nhập họ và tên</string>
+    <string name="Phone">Số điện thoại: </string>
+    <string name="phone">Nhập số điện thoại</string>
+    <string name="pass">Mật khẩu: </string>
+    <string name="Password">Nhập mật khẩu</string>
+    <string name="confirm_password">Xác nhận mật khẩu: </string>
+    <string name="Confirm_password">Nhập lại mật khẩu</string>
+    <string name="btn_signup">Đăng Ký</string>
+    <string name="todo">love</string>
+
+    <!--Home fragment-->
+    <string name="booth_suggest">Đề xuất cho bạn</string>
+    <string name="booth_new">Mới nhất</string>
+    <string name="booth_for_man">Dành cho nam</string>
+    <string name="booth_for_girl">Dành cho nữ</string>
+    <string name="btmore">Xem Thêm</string>
+
+    <!--promotion fragment-->
+    <string name="sale">Khuyến mãi</string>
+    <string name="salehalloween">Khuyến mãi cực khủng nhân dịp halloween</string>
+
+    <!--suppport activity-->
+    <string name="email">Email:</string>
+    <string name="email2">ducpaph06617@fpt.edu.vn</string>
+    <string name="support_app">Hỗ trợ vấn đề app</string>
+    <string name="hotline">Hotline :</string>
+    <string name="hotline2">0982776657</string>
+    <string name="gmail_not_installed">Ứng dụng gmail chưa được cài đặt!!!</string>
+
+    <!--Cart fragment-->
+    <string name="name_product">Tên sản phẩm</string>
+    <string name="colorname">Màu</string>
+    <string name="amount">Số lượng</string>
+    <string name="price">Giá</string>
+    <string name="company_name">Tên công ty</string>
+
+    <string name="count">Tổng cộng:</string>
+    <string name="money">0đ</string>
+    <string name="except">Xác nhận</string>
+
+
+    <!--nav_menu-->
+    <string name="information">Thông tin tài khoản</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="add_product">Đăng sản phẩm mới</string>
+    <string name="support">Trợ giúp</string>
+    <string name="logout">Thoát</string>
+    <string name="user_infor">Thông tin tài khoản</string>
+
+
+    <string name="logoutfb">Đăng xuất</string>
+    <string name="send">Gửi lại mã?</string>
+    <string name="enter_code">Mời bạn nhập</string>
+    <string name="enter_codeid">Mã gồm 6 kí tự</string>
+    <string name="infor">Thêm thông tin</string>
+    <string name="photo">Chọn ảnh</string>
+    <string name="error">Vui lòng nhập</string>
+    <string name="error_1">Bắt đầu là +84 hoặc 0</string>
+    <string name="error_2">Gồm 10 hoặc 11 kí tự</string>
+    <string name="updateimg">Đang tải ảnh lên</string>
+    <!--accout information-->
+    <string name="address">Địa chỉ:</string>
+    <string name="add_address">Nhập địa chỉ</string>
+    <string name="gender">Giới tính:</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="add_mail">Nhập email</string>
+    <string name="save">Lưu</string>
+
+    <!--add product-->
     <string name="add_name_shop">Nhập tên shop</string>
     <string name="add_name_product">Nhập tên sản phẩm</string>
     <string name="add_price">Nhập giá sản phẩm</string>
@@ -18,5 +98,6 @@
     <string name="booth_for_phone">Điện thoại</string>
     <string name="manage_product">Quản lý sản phẩm</string>
     <string name="nullcart">Giỏ hàng trống</string>
-    <string name="add_product">Thêm sản phẩm</string>
+    <string name="exit">Bạn có muốn thoát không!!!</string>
+    <string name="cancel">Hủy</string>
 </resources>
