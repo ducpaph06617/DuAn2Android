@@ -118,11 +118,7 @@ public class AddProductActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         addproduct();
-
-
     }
-
-
     private void mapped() {
         sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
         layout = findViewById(R.id.layout);
@@ -161,13 +157,11 @@ public class AddProductActivity extends AppCompatActivity {
                 addlistcolor();
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_LIST_CODE && resultCode == RESULT_OK && data != null) {
             ArrayList<String> pathList = data.getStringArrayListExtra("result");
             uri.clear();
