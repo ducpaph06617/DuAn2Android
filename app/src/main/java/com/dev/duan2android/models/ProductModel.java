@@ -7,12 +7,10 @@ public class ProductModel {
         public String nameproduct;
         public String priceproduct;
         public String colorproduct;
-
         public String describe;
         public String idsp;
         public String uri;
         public String loaisp;
-        //public String soluong;
         public String thoigian;
         public Product() {
         }

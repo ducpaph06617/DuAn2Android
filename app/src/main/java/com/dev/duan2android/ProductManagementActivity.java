@@ -55,8 +55,9 @@ public class ProductManagementActivity extends AppCompatActivity {
         recyclerviewproduct.setAdapter(productuserAdapter);
         Intent intent = getIntent();
         id = intent.getStringExtra("id1");
-        getproductuser();
         Log.e("idU", "buuu3"+id);
+        getproductuser();
+
     }
 
     private void getproductuser() {
@@ -71,10 +72,15 @@ public class ProductManagementActivity extends AppCompatActivity {
                 mDatabase.child("id").child(o.toString()).child("product").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        User.Product product = dataSnapshot.getValue(User.Product.class);
-                        products.add(0, product);
+                        User.Product product = null;
+                        for(DataSnapshot activitySnapShot: dataSnapshot.getChildren()){
+                             product = activitySnapShot.getValue(User.Product.class);
+                        }
+                        products.add(0,product);
+                        //Log.e("ssizeee", "onChildAdded: ",products.size() );
                         txtthongbao.setVisibility(View.GONE);
                         productuserAdapter.notifyDataSetChanged();
+                        Log.e("data",dataSnapshot.toString());
                     }
 
                     @Override

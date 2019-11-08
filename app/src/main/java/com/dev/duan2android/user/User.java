@@ -94,9 +94,9 @@ public class User {
             this.idsp = idsp;
             this.uri = uri;
             this.loaisp = loaisp;
-            //this.soluong = soluong;
             this.thoigian = thoigian;
         }
+
 
         public String getNameshop() {
             return nameshop;
@@ -219,14 +219,13 @@ public class User {
 
      public static class cartsp{
         public String idsp;
-        public String soluong;
 
          public cartsp() {
          }
 
-         public cartsp(String idsp, String soluong) {
+         public cartsp(String idsp) {
              this.idsp = idsp;
-             this.soluong = soluong;
+
          }
 
          public String getIdsp() {
@@ -237,13 +236,7 @@ public class User {
              this.idsp = idsp;
          }
 
-         public String getSoluong() {
-             return soluong;
-         }
 
-         public void setSoluong(String soluong) {
-             this.soluong = soluong;
-         }
      }
 
 }

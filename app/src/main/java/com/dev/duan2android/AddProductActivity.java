@@ -144,7 +144,7 @@ public class AddProductActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddProductActivity.this,ProductManagementActivity.class);
                 intent.putExtra("id1", id);
                 Log.e("abcccccc2", "onSuccess: "+id );
-                finish();
+                startActivity(intent);
             }
         });
         btnChonmau.setOnClickListener(new View.OnClickListener() {
@@ -311,11 +311,12 @@ public class AddProductActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(AddProductActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
-                                System.exit(0);
+
                                 Intent intent = new Intent(AddProductActivity.this,ProductManagementActivity.class);
                                 intent.putExtra("id1", id);
+                                startActivity(intent);
                                 Log.e("abcccccc", "onSuccess: "+id );
-                                finish();
+
 
                             }
                         });
